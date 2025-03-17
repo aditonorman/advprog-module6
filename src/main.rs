@@ -12,13 +12,12 @@ use lib::ThreadPool;
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
 
-    // Create a thread pool with a fixed number of threads (e.g., 4)
-    let pool = ThreadPool::new(4);
+    // Using the build function with error handling:
+    let pool = ThreadPool::build(4).unwrap();
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        // Submit the connection handling job to the thread pool.
         pool.execute(|| {
             handle_connection(stream);
         });

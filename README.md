@@ -18,3 +18,7 @@ In this commit, I decided to add a /sleep route to my Rust server to simulate a 
 ## Commit 5 Reflection notes
 
 In this commit, I Integrated the ThreadPool into my server was a game changer. By refactoring my code to route incoming connections through a pool of four worker threads instead of handling them sequentially, I managed to improve the server’s responsiveness significantly—especially noticeable when processing the simulated slow /sleep route. I replaced the direct call to handle_connection with a call to pool.execute, which allowed multiple requests to be handled concurrently. This hands-on experiment deepened my understanding of Rust’s concurrency primitives, such as channels, Arc, and Mutex, and showed me firsthand how critical non-blocking design is for scalable server applications. Overall, this experience not only resolved the performance bottleneck I had with a single-threaded model but also motivated me to explore further advancements like asynchronous I/O for even more efficient processing in future projects.
+
+## Commit Bonus reflection notes
+
+In this bonus exercise, I created a new function called build as an alternative constructor to new for my ThreadPool. While the original new function uses an assertion to ensure the size is greater than 0 (causing a panic if it isn’t), the build function returns a Result, allowing the caller to handle an invalid size gracefully. This improvement not only makes the API more robust and user-friendly but also encourages better error handling practices. 
